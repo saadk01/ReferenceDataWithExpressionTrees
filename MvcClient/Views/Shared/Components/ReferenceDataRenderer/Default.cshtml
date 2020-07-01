@@ -1,0 +1,4 @@
+﻿@model SelectBoxDisplayViewModel
+
+@Html.DropDownList(Model.ElementName, Model.SelectListItems, null, Model.HtmlAttributes)
+@Html.ValidationMessage(Model.ElementName, new { @class = "error-text" })

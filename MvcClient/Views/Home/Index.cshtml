@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="align-content-lg-end">
+        <label>All provinces' choices:</label>
+        @await Component.InvokeAsync("ReferenceDataRenderer", new
+                    {
+                        refDataType = ProjectConstants.ReferenceDataTypes.Province,
+                        selectionCriteria = new SelectionCriteria().SetNoCriteria(),
+                        elementName = "ProvinceID1",
+                        htmlClasses = "d-flex flex-column",
+                        userSelectedValue = Model?.ProvinceID ?? null,
+                        required = true,
+                        disabled = false
+                    })
+
+
+        <label>Provinces starting with 'N'</label>
+        @await Component.InvokeAsync("ReferenceDataRenderer", new
+        {
+            refDataType = ProjectConstants.ReferenceDataTypes.Province,
+            selectionCriteria = new SelectionCriteria().PrepareSelectionCriteriaProperties("Name", "N", ProjectConstants.Operators.Comparison.LIKE).ReturnCollection(),
+            elementName = "ProvinceID2",
+            htmlClasses = "d-flex flex-column",
+            userSelectedValue = Model?.ProvinceID ?? null,
+            required = true,
+            disabled = false
+        })
+
+
+        <label>Provinces entering Confideration in 20th century</label>
+        @await Component.InvokeAsync("ReferenceDataRenderer", new
+        {
+            refDataType = ProjectConstants.ReferenceDataTypes.Province,
+            selectionCriteria = new SelectionCriteria().PrepareSelectionCriteriaProperties("EffectiveFromDate", new DateTime(1900, 1, 1), ProjectConstants.Operators.Comparison.GREATER_EQ).ReturnCollection(),
+            elementName = "ProvinceID3",
+            htmlClasses = "d-flex flex-column",
+            userSelectedValue = Model?.ProvinceID ?? null,
+            required = true,
+            disabled = false
+        })
+
+        <label>Selection of Candaian Prairies</label>
+        @{
+            var selectionOptions = new SelectionCriteria()
+                .PrepareSelectionCriteriaProperties("Name", "Alberta", ProjectConstants.Operators.Comparison.EQUAL)
+                .PrepareSelectionCriteriaProperties("Name", "Saskatchewan", ProjectConstants.Operators.Comparison.EQUAL, ProjectConstants.Operators.SqlWhere.OR)
+                .PrepareSelectionCriteriaProperties("Name", "Manitoba", ProjectConstants.Operators.Comparison.EQUAL, ProjectConstants.Operators.SqlWhere.OR);
+
+
+            @await Component.InvokeAsync("ReferenceDataRenderer", new
+            {
+                refDataType = ProjectConstants.ReferenceDataTypes.Province,
+                selectionCriteria = selectionOptions.ReturnCollection(),
+                elementName = "ProvinceID4",
+                htmlClasses = "d-flex flex-column",
+                userSelectedValue = Model?.ProvinceID ?? null,
+                required = true,
+                disabled = false
+            })
+        }
+
+        <label>All Seasons:</label>
+        @await Component.InvokeAsync("ReferenceDataRenderer", new
+            {
+                refDataType = ProjectConstants.ReferenceDataTypes.Season,
+                selectionCriteria = new SelectionCriteria().SetNoCriteria(),
+                elementName = "SeasonID1",
+                htmlClasses = "d-flex flex-column",
+                userSelectedValue = Model?.SeasonID ?? null,
+                required = true,
+                disabled = false
+            })
+
+        <label>If you are a constructor, select your favorite season:</label>
+        @await Component.InvokeAsync("ReferenceDataRenderer", new
+            {
+                refDataType = ProjectConstants.ReferenceDataTypes.Season,
+                selectionCriteria = new SelectionCriteria().PrepareSelectionCriteriaProperties("Name", "Construction", ProjectConstants.Operators.Comparison.LIKE).ReturnCollection(),
+                elementName = "SeasonID2",
+                htmlClasses = "d-flex flex-column",
+                userSelectedValue = Model?.SeasonID ?? null,
+                required = true,
+                disabled = false
+            })
+
+        <label>Enter your favorite season (disabled drop-down):</label>
+        @await Component.InvokeAsync("ReferenceDataRenderer", new
+            {
+                refDataType = ProjectConstants.ReferenceDataTypes.Season,
+                selectionCriteria = new SelectionCriteria().SetNoCriteria(),
+                elementName = "SeasonID3",
+                htmlClasses = "d-flex flex-column",
+                userSelectedValue = 3,
+                required = true,
+                disabled = true
+            })
+    </div>
