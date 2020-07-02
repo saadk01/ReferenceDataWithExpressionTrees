@@ -16,7 +16,7 @@
                     })
 
 
-        <label>Provinces starting with 'N'</label>
+        <label>Provinces starting with 'N':</label>
         @await Component.InvokeAsync("ReferenceDataRenderer", new
         {
             refDataType = ProjectConstants.ReferenceDataTypes.Province,
@@ -29,7 +29,7 @@
         })
 
 
-        <label>Provinces entering Confideration in 20th century</label>
+        <label>Provinces entering Confideration in 20th century:</label>
         @await Component.InvokeAsync("ReferenceDataRenderer", new
         {
             refDataType = ProjectConstants.ReferenceDataTypes.Province,
@@ -41,7 +41,7 @@
             disabled = false
         })
 
-        <label>Selection of Candaian Prairies</label>
+        <label>Selection of Candaian Prairies:</label>
         @{
             var selectionOptions = new SelectionCriteria()
                 .PrepareSelectionCriteriaProperties("Name", "Alberta", ProjectConstants.Operators.Comparison.EQUAL)

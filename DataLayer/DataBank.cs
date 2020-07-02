@@ -9,7 +9,7 @@ namespace DataLayer
 {
     /// <summary>
     /// An overly simplistic replacement for database and ORMs for demonstration purposes. The content in this class can easily
-    /// be replaced by real-life alternatives like Entity Framework or NHibernate without chaning other layers.  
+    /// be replaced by real-life alternatives like Entity Framework or NHibernate (and a DB) without chaning other layers.  
     /// </summary>
     public class DataBank : IDataBank
     {
